@@ -31,10 +31,8 @@ include "includes/header.php";
                              onerror="this.src='https://via.placeholder.com/400x220?text=Produk+IT'">
                         
                         <div class="card-body">
-                            <h5 class="card-title fw-bold text-primary"><?= $row['nama_produk']; ?></h5>
-                            <p class="card-text text-secondary lh-base">
-                                <?= nl2br($row['deskripsi']); ?>
-                            </p>
+                            <h5 class="card-title fw-bold text-primary"><?= e($row['nama_produk']); ?></h5>
+                            <p class="card-text text-secondary lh-base"><?= nl2br(e($row['deskripsi'])); ?></p>
                         </div>
                         <div class="card-footer bg-white border-0 pb-3">
                             <a href="kontak.php" class="btn btn-outline-primary w-100">

@@ -1,24 +1,23 @@
 <?php
-session_start();
 include "../../config/koneksi.php";
+include "../../includes/functions.php";
+cekLogin();
 
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: ../login.php");
-    exit();
-}
+$error = "";
 
 if (isset($_POST['simpan'])) {
     $judul = mysqli_real_escape_string($koneksi, $_POST['judul']);
 
-    // Upload Foto
-    $filename = $_FILES['foto']['name'];
-    $tmp_name = $_FILES['foto']['tmp_name'];
-    
-    if ($filename != '') {
-        $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $nama_foto_baru = time() . '_' . rand(100, 999) . '.' . $ext;
-        move_uploaded_file($tmp_name, "../../assets/img/" . $nama_foto_baru);
+    if (!empty($_FILES['foto']['name'])) {
+        $nama_foto_baru = uploadGambar($_FILES['foto']);
+        if ($nama_foto_baru === false) {
+            $error = "File gagal diunggah! Harus berupa gambar (JPG, PNG, WEBP, GIF) dan maksimal 2MB.";
+        }
+    } else {
+        $error = "File foto wajib diisi!";
+    }
 
+    if (empty($error)) {
         $query = "INSERT INTO galeri (judul, foto) VALUES ('$judul', '$nama_foto_baru')";
         if (mysqli_query($koneksi, $query)) {
             header("Location: index.php");
@@ -41,6 +40,13 @@ if (isset($_POST['simpan'])) {
         <div class="col-md-6">
             <div class="card border-0 shadow-sm p-4">
                 <h4 class="fw-bold mb-4">Tambah Foto Galeri</h4>
+
+                <?php if (!empty($error)): ?>
+                    <div class="alert alert-danger py-2 small mb-3">
+                        <?= $error; ?>
+                    </div>
+                <?php endif; ?>
+
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Judul / Keterangan Foto</label>

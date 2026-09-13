@@ -1,32 +1,29 @@
 <?php
-session_start();
 include "../../config/koneksi.php";
+include "../../includes/functions.php";
+cekLogin();
 
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: ../login.php");
-    exit();
-}
+$error = "";
 
 if (isset($_POST['simpan'])) {
     $nama_produk = mysqli_real_escape_string($koneksi, $_POST['nama_produk']);
     $deskripsi   = mysqli_real_escape_string($koneksi, $_POST['deskripsi']);
 
-    // Upload Gambar
-    $filename = $_FILES['gambar']['name'];
-    $tmp_name = $_FILES['gambar']['tmp_name'];
-    
-    if ($filename != '') {
-        $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $nama_gambar_baru = time() . '_' . rand(100, 999) . '.' . $ext;
-        move_uploaded_file($tmp_name, "../../assets/img/" . $nama_gambar_baru);
+    if (!empty($_FILES['gambar']['name'])) {
+        $nama_gambar_baru = uploadGambar($_FILES['gambar']);
+        if ($nama_gambar_baru === false) {
+            $error = "File gagal diunggah! Harus berupa gambar (JPG, PNG, WEBP, GIF) dan maksimal 2MB.";
+        }
     } else {
         $nama_gambar_baru = 'default.jpg';
     }
 
-    $query = "INSERT INTO produk (nama_produk, deskripsi, gambar) VALUES ('$nama_produk', '$deskripsi', '$nama_gambar_baru')";
-    if (mysqli_query($koneksi, $query)) {
-        header("Location: index.php");
-        exit();
+    if (empty($error)) {
+        $query = "INSERT INTO produk (nama_produk, deskripsi, gambar) VALUES ('$nama_produk', '$deskripsi', '$nama_gambar_baru')";
+        if (mysqli_query($koneksi, $query)) {
+            header("Location: index.php");
+            exit();
+        }
     }
 }
 ?>
@@ -44,6 +41,13 @@ if (isset($_POST['simpan'])) {
         <div class="col-md-6">
             <div class="card border-0 shadow-sm p-4">
                 <h4 class="fw-bold mb-4">Tambah Produk Baru</h4>
+
+                <?php if (!empty($error)): ?>
+                    <div class="alert alert-danger py-2 small mb-3">
+                        <i class="fa-solid fa-triangle-exclamation me-1"></i> <?= $error; ?>
+                    </div>
+                <?php endif; ?>
+
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Nama Produk</label>

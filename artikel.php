@@ -34,10 +34,8 @@ include "includes/header.php";
                             <small class="text-muted d-block mb-2">
                                 <i class="fa-regular fa-calendar me-1"></i><?= date('d M Y', strtotime($row['tanggal'])); ?>
                             </small>
-                            <h5 class="card-title fw-bold text-primary"><?= $row['judul']; ?></h5>
-                            <p class="card-text text-secondary lh-base">
-                                <?= substr($row['ringkasan'], 0, 120); ?>...
-                            </p>
+                            <h5 class="card-title fw-bold text-primary"><?= e($row['judul']); ?></h5>
+                            <p class="card-text text-secondary lh-base"><?= e(substr($row['ringkasan'], 0, 120)); ?>...</p>
                         </div>
                         <div class="card-footer bg-white border-0 pb-3">
                             <a href="detail_artikel.php?id=<?= $row['id']; ?>" class="btn btn-outline-primary btn-sm w-100">

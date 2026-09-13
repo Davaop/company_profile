@@ -31,7 +31,7 @@ include "includes/header.php";
                              onerror="this.src='https://via.placeholder.com/400x250?text=Galeri+Foto'">
                         
                         <div class="card-body bg-white text-center">
-                            <h6 class="card-title fw-bold text-dark mb-0"><?= $row['judul']; ?></h6>
+                            <h6 class="card-title fw-bold text-dark mb-0"><?= e($row['judul']); ?></h6>
                         </div>
                     </div>
                 </div>

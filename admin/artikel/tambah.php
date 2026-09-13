@@ -1,11 +1,9 @@
 <?php
-session_start();
 include "../../config/koneksi.php";
+include "../../includes/functions.php";
+cekLogin();
 
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: ../login.php");
-    exit();
-}
+$error = "";
 
 if (isset($_POST['simpan'])) {
     $judul       = mysqli_real_escape_string($koneksi, $_POST['judul']);
@@ -13,23 +11,22 @@ if (isset($_POST['simpan'])) {
     $isi_artikel = mysqli_real_escape_string($koneksi, $_POST['isi_artikel']);
     $tanggal     = date('Y-m-d');
 
-    // Upload Thumbnail
-    $filename = $_FILES['thumbnail']['name'];
-    $tmp_name = $_FILES['thumbnail']['tmp_name'];
-    
-    if ($filename != '') {
-        $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $nama_thumb_baru = time() . '_' . rand(100, 999) . '.' . $ext;
-        move_uploaded_file($tmp_name, "../../assets/img/" . $nama_thumb_baru);
+    if (!empty($_FILES['thumbnail']['name'])) {
+        $nama_thumb_baru = uploadGambar($_FILES['thumbnail']);
+        if ($nama_thumb_baru === false) {
+            $error = "File gagal diunggah! Harus berupa gambar (JPG, PNG, WEBP, GIF) dan maksimal 2MB.";
+        }
     } else {
         $nama_thumb_baru = 'default_artikel.jpg';
     }
 
-    $query = "INSERT INTO artikel (judul, ringkasan, isi_artikel, thumbnail, tanggal) 
-              VALUES ('$judul', '$ringkasan', '$isi_artikel', '$nama_thumb_baru', '$tanggal')";
-    if (mysqli_query($koneksi, $query)) {
-        header("Location: index.php");
-        exit();
+    if (empty($error)) {
+        $query = "INSERT INTO artikel (judul, ringkasan, isi_artikel, thumbnail, tanggal) 
+                  VALUES ('$judul', '$ringkasan', '$isi_artikel', '$nama_thumb_baru', '$tanggal')";
+        if (mysqli_query($koneksi, $query)) {
+            header("Location: index.php");
+            exit();
+        }
     }
 }
 ?>
@@ -47,6 +44,13 @@ if (isset($_POST['simpan'])) {
         <div class="col-md-8">
             <div class="card border-0 shadow-sm p-4">
                 <h4 class="fw-bold mb-4">Tambah Artikel Baru</h4>
+
+                <?php if (!empty($error)): ?>
+                    <div class="alert alert-danger py-2 small mb-3">
+                        <?= $error; ?>
+                    </div>
+                <?php endif; ?>
+
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Judul Artikel</label>
@@ -54,7 +58,7 @@ if (isset($_POST['simpan'])) {
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Ringkasan Singkat</label>
-                        <textarea name="ringkasan" class="form-control" rows="2" placeholder="Muncul di card depan..." required></textarea>
+                        <textarea name="ringkasan" class="form-control" rows="2" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Isi Artikel Lengkap</label>

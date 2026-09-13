@@ -17,20 +17,16 @@ if (isset($_POST['login'])) {
     $query  = mysqli_query($koneksi, "SELECT * FROM admin WHERE username='$username'");
     $admin  = mysqli_fetch_assoc($query);
 
-    if ($admin) {
-        // Verifikasi password (Bisa disesuaikan jika kamu pakai password_verify atau plain text saat testing)
-        if (password_verify($password, $admin['password']) || $password === $admin['password']) {
-            $_SESSION['admin_logged_in'] = true;
-            $_SESSION['admin_id']        = $admin['id'];
-            $_SESSION['admin_nama']      = $admin['nama_lengkap'];
-            
-            header("Location: dashboard.php");
-            exit();
-        } else {
-            $error = "Password salah!";
-        }
+    // HANYA MENGGUNAKAN PASSWORD_VERIFY (AMAN XSS & PLAINTEXT HACK)
+    if ($admin && password_verify($password, $admin['password'])) {
+        $_SESSION['admin_logged_in'] = true;
+        $_SESSION['admin_id']        = $admin['id'];
+        $_SESSION['admin_nama']      = $admin['nama_lengkap'];
+        
+        header("Location: dashboard.php");
+        exit();
     } else {
-        $error = "Username tidak ditemukan!";
+        $error = "Username atau password salah!";
     }
 }
 ?>
