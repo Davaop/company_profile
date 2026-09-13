@@ -11,7 +11,7 @@
       <!-- Kolom 2: Navigasi Cepat -->
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
         <h5 class="text-uppercase mb-4 fw-bold text-warning">Navigasi</h5>
-        <p><a href="profil.php" class="text-white text-decoration-none">Profil Perusahaan</a></p>
+        <p><a href="profile.php" class="text-white text-decoration-none">Profil Perusahaan</a></p>
         <p><a href="produk.php" class="text-white text-decoration-none">Layanan & Produk</a></p>
         <p><a href="artikel.php" class="text-white text-decoration-none">Artikel Terbaru</a></p>
         <p><a href="kontak.php" class="text-white text-decoration-none">Hubungi Kami</a></p>
@@ -38,6 +38,6 @@
 </footer>
 
 <!-- Bootstrap 5 JavaScript Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.css"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

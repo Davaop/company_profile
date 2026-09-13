@@ -40,34 +40,9 @@ include "includes/header.php";
                             </p>
                         </div>
                         <div class="card-footer bg-white border-0 pb-3">
-                            <!-- Link ke modal / detail artikel -->
-                            <button type="button" class="btn btn-outline-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#modalArtikel<?= $row['id']; ?>">
+                            <a href="detail_artikel.php?id=<?= $row['id']; ?>" class="btn btn-outline-primary btn-sm w-100">
                                 <i class="fa-solid fa-eye me-1"></i> Baca Selengkapnya
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- MODAL POPUP UNTUK DETAIL ISINIYA -->
-                <div class="modal fade" id="modalArtikel<?= $row['id']; ?>" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title fw-bold text-primary"><?= $row['judul']; ?></h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p class="text-muted small">
-                                    <i class="fa-regular fa-calendar me-1"></i> Dipublikasikan pada: <?= date('d F Y', strtotime($row['tanggal'])); ?>
-                                </p>
-                                <img src="assets/img/<?= $row['thumbnail']; ?>" class="img-fluid rounded mb-3 w-100" style="max-height: 350px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/800x350?text=Artikel+IT'">
-                                <div class="lh-lg text-secondary">
-                                    <?= nl2br($row['isi_artikel']); ?>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>

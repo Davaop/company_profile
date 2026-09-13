@@ -1,5 +1,8 @@
 <?php
-// 1. Panggil header (Navbar & Bootstrap sudah include di sini)
+// 1. Wajib panggil koneksi database di paling atas
+include "config/koneksi.php";
+
+// 2. Baru panggil header
 include "includes/header.php";
 ?>
 
