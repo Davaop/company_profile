@@ -28,7 +28,7 @@ include "includes/header.php";
                 <p class="text-secondary">
                     <?= !empty($profil['sejarah']) ? substr($profil['sejarah'], 0, 300) . '...' : 'PT Digital Solusi Nusantara adalah perusahaan yang bergerak di bidang Jasa IT...'; ?>
                 </p>
-                <a href="profil.php" class="btn btn-outline-primary">Baca Selengkapnya &raquo;</a>
+                <a href="profile.php" class="btn btn-outline-primary">Baca Selengkapnya &raquo;</a>
             </div>
             <div class="col-md-6 text-center">
                 <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&auto=format&fit=crop&q=60" class="img-fluid rounded shadow" alt="Tentang Perusahaan">

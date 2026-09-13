@@ -36,7 +36,7 @@ include "config/koneksi.php";
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="profil.php">Profil</a></li>
+        <li class="nav-item"><a class="nav-link" href="profile.php">Profil</a></li>
         <li class="nav-item"><a class="nav-link" href="produk.php">Produk</a></li>
         <li class="nav-item"><a class="nav-link" href="artikel.php">Artikel</a></li>
         <li class="nav-item"><a class="nav-link" href="galeri.php">Galeri</a></li>
