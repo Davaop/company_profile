@@ -21,15 +21,15 @@ if (!$artikel) {
 
     <div class="row justify-content-center">
         <div class="col-md-9">
-            <h1 class="fw-bold text-primary mb-3"><?= $artikel['judul']; ?></h1>
+            <h1 class="fw-bold text-primary mb-3"><?= e($artikel['judul']); ?></h1>
             <p class="text-muted small mb-4">
                 <i class="fa-regular fa-calendar me-1"></i> Dipublikasikan pada: <?= date('d F Y', strtotime($artikel['tanggal'])); ?>
             </p>
             
-            <img src="assets/img/<?= $artikel['thumbnail']; ?>" class="img-fluid rounded mb-4 w-100 shadow-sm" style="max-height: 400px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/800x400?text=Artikel'">
+            <img src="assets/img/<?= e($artikel['thumbnail']); ?>" class="img-fluid rounded mb-4 w-100 shadow-sm" style="max-height: 400px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/800x400?text=Artikel'">
 
             <div class="lh-lg text-secondary fs-5" style="text-align: justify;">
-                <?= nl2br($artikel['isi_artikel']); ?>
+                <?= nl2br(e($artikel['isi_artikel'])); ?>
             </div>
         </div>
     </div>

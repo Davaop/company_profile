@@ -1,6 +1,7 @@
 <?php
 // 1. Panggil koneksi dan header
 include "config/koneksi.php";
+include "includes/functions.php";
 include "includes/header.php";
 ?>
 

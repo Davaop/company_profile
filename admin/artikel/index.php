@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../../config/koneksi.php";
+include "../../includes/functions.php";
 
 if (!isset($_SESSION['admin_logged_in'])) {
     header("Location: ../login.php");
@@ -64,7 +65,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM artikel ORDER BY tanggal DESC");
                             <td>
                                 <img src="../../assets/img/<?= $row['thumbnail']; ?>" width="60" class="rounded shadow-sm" onerror="this.src='https://via.placeholder.com/60'">
                             </td>
-                            <td class="fw-bold"><?= $row['judul']; ?></td>
+                            <td class="fw-bold"><?= e($row['judul']); ?></td>
                             <td><small class="text-muted"><?= date('d/m/Y', strtotime($row['tanggal'])); ?></small></td>
                             <td class="text-center">
                                 <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pen-to-square"></i></a>

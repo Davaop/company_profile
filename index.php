@@ -57,10 +57,10 @@ include "includes/header.php";
             ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 shadow-sm border-0">
-                            <img src="assets/img/<?= $produk['gambar']; ?>" class="card-img-top" alt="<?= $produk['nama_produk']; ?>" style="height: 200px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/300x200?text=Produk+IT'">
+                            <img src="assets/img/<?= e($produk['gambar']); ?>" class="card-img-top" alt="<?= e($produk['nama_produk']); ?>" style="height: 200px; object-fit: cover;">
                             <div class="card-body">
-                                <h5 class="card-title fw-bold"><?= $produk['nama_produk']; ?></h5>
-                                <p class="card-text text-secondary"><?= substr($produk['deskripsi'], 0, 100); ?>...</p>
+                                <h5 class="card-title fw-bold text-primary"><?= e($produk['nama_produk']); ?></h5>
+                                <p class="card-text text-secondary lh-base"><?= e(substr($produk['deskripsi'], 0, 100)); ?>...</p>
                             </div>
                             <div class="card-footer bg-white border-0 pb-3">
                                 <a href="produk.php" class="btn btn-primary btn-sm w-100">Detail Layanan</a>
@@ -94,13 +94,13 @@ include "includes/header.php";
             ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 shadow-sm border-0">
-                            <img src="assets/img/<?= $artikel['thumbnail']; ?>" class="card-img-top" alt="<?= $artikel['judul']; ?>" style="height: 180px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/300x180?text=Artikel+IT'">
+                            <img src="assets/img/<?= e($artikel['thumbnail']); ?>" class="card-img-top" alt="<?= e($artikel['judul']); ?>" style="height: 200px; object-fit: cover;">
                             <div class="card-body">
                                 <small class="text-muted mb-2 d-block">
                                     <i class="fa-regular fa-calendar me-1"></i><?= date('d M Y', strtotime($artikel['tanggal'])); ?>
                                 </small>
-                                <h5 class="card-title fw-bold text-dark"><?= $artikel['judul']; ?></h5>
-                                <p class="card-text text-secondary"><?= $artikel['ringkasan']; ?></p>
+                               <h5 class="card-title fw-bold text-dark"><?= e($artikel['judul']); ?></h5>
+                               <p class="card-text text-secondary lh-base"><?= e($artikel['ringkasan']); ?></p>
                             </div>
                             <div class="card-footer bg-white border-0 pb-3">
                                 <a href="artikel.php" class="btn btn-outline-primary btn-sm w-100">Baca Selengkapnya</a>

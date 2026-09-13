@@ -1,38 +1,43 @@
 <?php
-session_start();
 include "../../config/koneksi.php";
+include "../../includes/functions.php";
+cekLogin();
 
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: ../login.php");
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$query = mysqli_query($koneksi, "SELECT * FROM galeri WHERE id='$id'");
+$data = mysqli_fetch_assoc($query);
+
+if (!$data) {
+    header("Location: index.php");
     exit();
 }
 
-$id = $_GET['id'];
-$data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM galeri WHERE id='$id'"));
+$error = "";
 
 if (isset($_POST['update'])) {
     $judul = mysqli_real_escape_string($koneksi, $_POST['judul']);
 
-    $filename = $_FILES['foto']['name'];
-    $tmp_name = $_FILES['foto']['tmp_name'];
-
-    if ($filename != '') {
-        $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $nama_foto_baru = time() . '_' . rand(100, 999) . '.' . $ext;
-        move_uploaded_file($tmp_name, "../../assets/img/" . $nama_foto_baru);
-
-        if (file_exists("../../assets/img/" . $data['foto'])) {
-            unlink("../../assets/img/" . $data['foto']);
+    if (!empty($_FILES['foto']['name'])) {
+        $nama_foto_baru = uploadGambar($_FILES['foto']);
+        if ($nama_foto_baru !== false) {
+            if (!empty($data['foto']) && file_exists("../../assets/img/" . $data['foto'])) {
+                unlink("../../assets/img/" . $data['foto']);
+            }
+            $query_update = "UPDATE galeri SET judul='$judul', foto='$nama_foto_baru' WHERE id='$id'";
+        } else {
+            $error = "File gagal diunggah! Harus gambar (JPG/PNG/WEBP/GIF), maks 2MB.";
         }
-
-        $query = "UPDATE galeri SET judul='$judul', foto='$nama_foto_baru' WHERE id='$id'";
     } else {
-        $query = "UPDATE galeri SET judul='$judul' WHERE id='$id'";
+        $query_update = "UPDATE galeri SET judul='$judul' WHERE id='$id'";
     }
 
-    if (mysqli_query($koneksi, $query)) {
-        header("Location: index.php");
-        exit();
+    if (empty($error)) {
+        if (mysqli_query($koneksi, $query_update)) {
+            header("Location: index.php");
+            exit();
+        } else {
+            $error = "Gagal memperbarui database: " . mysqli_error($koneksi);
+        }
     }
 }
 ?>
@@ -44,22 +49,24 @@ if (isset($_POST['update'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light py-5">
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card border-0 shadow-sm p-4">
                 <h4 class="fw-bold mb-4">Edit Foto Galeri</h4>
+                <?php if (!empty($error)): ?>
+                    <div class="alert alert-danger py-2 small mb-3"><?= $error; ?></div>
+                <?php endif; ?>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Judul / Keterangan Foto</label>
-                        <input type="text" name="judul" class="form-control" value="<?= $data['judul']; ?>" required>
+                        <input type="text" name="judul" class="form-control" value="<?= e($data['judul']); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Foto Saat Ini</label><br>
-                        <img src="../../assets/img/<?= $data['foto']; ?>" width="120" class="rounded mb-2" onerror="this.src='https://via.placeholder.com/120'">
+                        <img src="../../assets/img/<?= e($data['foto']); ?>" width="120" class="rounded mb-2" onerror="this.src='https://via.placeholder.com/120'">
                         <input type="file" name="foto" class="form-control">
-                        <small class="text-muted">*Biarkan kosong jika tidak diganti.</small>
+                        <small class="text-muted">*Biarkan kosong jika tidak ingin mengganti gambar.</small>
                     </div>
                     <div class="d-flex justify-content-between">
                         <a href="index.php" class="btn btn-secondary">Batal</a>
@@ -70,6 +77,5 @@ if (isset($_POST['update'])) {
         </div>
     </div>
 </div>
-
 </body>
 </html>

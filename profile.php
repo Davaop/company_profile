@@ -23,7 +23,7 @@ $profil = mysqli_fetch_assoc($query);
             <div class="card shadow-sm border-0 p-4">
                 <h3 class="fw-bold text-primary mb-3"><i class="fa-solid fa-history me-2"></i>Sejarah Perusahaan</h3>
                 <p class="text-secondary lh-lg" style="text-align: justify;">
-                    <?= !empty($profil['sejarah']) ? nl2br($profil['sejarah']) : 'Data sejarah perusahaan belum diisi.'; ?>
+                    <?= !empty($profil['sejarah']) ? nl2br(e($profil['sejarah'])) : 'Data sejarah perusahaan belum diisi.'; ?>
                 </p>
             </div>
         </div>
@@ -33,7 +33,7 @@ $profil = mysqli_fetch_assoc($query);
             <div class="card h-100 shadow-sm border-0 p-4">
                 <h3 class="fw-bold text-primary mb-3"><i class="fa-solid fa-eye me-2"></i>Visi</h3>
                 <p class="text-secondary lh-lg">
-                    <?= !empty($profil['visi']) ? nl2br($profil['visi']) : 'Data visi belum diisi.'; ?>
+                    <?= !empty($profil['visi']) ? nl2br(e($profil['visi'])) : 'Data visi belum diisi.'; ?>
                 </p>
             </div>
         </div>
@@ -42,7 +42,7 @@ $profil = mysqli_fetch_assoc($query);
             <div class="card h-100 shadow-sm border-0 p-4">
                 <h3 class="fw-bold text-primary mb-3"><i class="fa-solid fa-bullseye me-2"></i>Misi</h3>
                 <p class="text-secondary lh-lg">
-                    <?= !empty($profil['misi']) ? nl2br($profil['misi']) : 'Data misi belum diisi.'; ?>
+                    <?= !empty($profil['misi']) ? nl2br(e($profil['misi'])) : 'Data misi belum diisi.'; ?>
                 </p>
             </div>
         </div>
@@ -52,7 +52,7 @@ $profil = mysqli_fetch_assoc($query);
             <div class="card shadow-sm border-0 p-4 bg-light">
                 <h3 class="fw-bold text-primary mb-3"><i class="fa-solid fa-star me-2"></i>Nilai-Nilai Utama</h3>
                 <p class="text-secondary lh-lg mb-0">
-                    <?= !empty($profil['nilai_perusahaan']) ? nl2br($profil['nilai_perusahaan']) : 'Data nilai perusahaan belum diisi.'; ?>
+                    <?= !empty($profil['nilai_perusahaan']) ? nl2br(e($profil['nilai_perusahaan'])) : 'Data nilai perusahaan belum diisi.'; ?>
                 </p>
             </div>
         </div>

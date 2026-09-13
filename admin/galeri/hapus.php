@@ -1,17 +1,13 @@
 <?php
-session_start();
 include "../../config/koneksi.php";
+include "../../includes/functions.php";
+cekLogin();
 
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: ../login.php");
-    exit();
-}
-
-$id = $_GET['id'];
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM galeri WHERE id='$id'"));
 
 if ($data) {
-    if (file_exists("../../assets/img/" . $data['foto'])) {
+    if (!empty($data['foto']) && file_exists("../../assets/img/" . $data['foto'])) {
         unlink("../../assets/img/" . $data['foto']);
     }
     mysqli_query($koneksi, "DELETE FROM galeri WHERE id='$id'");

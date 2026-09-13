@@ -27,7 +27,7 @@ $profil = mysqli_fetch_assoc($query);
                     <i class="fa-solid fa-location-dot text-primary fa-lg me-3 mt-2"></i>
                     <div>
                         <h6 class="fw-bold mb-1">Alamat Kantor</h6>
-                        <p class="text-secondary mb-0"><?= !empty($profil['alamat']) ? nl2br($profil['alamat']) : 'Alamat belum diatur.'; ?></p>
+                        <p class="text-secondary mb-0"><?= !empty($profil['alamat']) ? nl2br(e($profil['alamat'])) : 'Alamat belum diatur.'; ?></p>
                     </div>
                 </div>
 
@@ -35,7 +35,7 @@ $profil = mysqli_fetch_assoc($query);
                     <i class="fa-solid fa-phone text-primary fa-lg me-3 mt-2"></i>
                     <div>
                         <h6 class="fw-bold mb-1">Telepon / WhatsApp</h6>
-                        <p class="text-secondary mb-0"><?= !empty($profil['telepon']) ? $profil['telepon'] : 'Nomor belum diatur.'; ?></p>
+                        <p class="text-secondary mb-0"><?= !empty($profil['telepon']) ? e($profil['telepon']) : 'Nomor belum diatur.'; ?></p>
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@ $profil = mysqli_fetch_assoc($query);
                     <i class="fa-solid fa-envelope text-primary fa-lg me-3 mt-2"></i>
                     <div>
                         <h6 class="fw-bold mb-1">Email Resmi</h6>
-                        <p class="text-secondary mb-0"><?= !empty($profil['email']) ? $profil['email'] : 'Email belum diatur.'; ?></p>
+                        <p class="text-secondary mb-0"><?= !empty($profil['email']) ? e($profil['email']) : 'Email belum diatur.'; ?></p>
                     </div>
                 </div>
 

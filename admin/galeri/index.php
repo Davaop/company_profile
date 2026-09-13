@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../../config/koneksi.php";
+include "../../includes/functions.php";
 
 if (!isset($_SESSION['admin_logged_in'])) {
     header("Location: ../login.php");
@@ -63,7 +64,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM galeri ORDER BY id DESC");
                             <td>
                                 <img src="../../assets/img/<?= $row['foto']; ?>" width="70" class="rounded shadow-sm" style="height: 50px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/70'">
                             </td>
-                            <td class="fw-bold"><?= $row['judul']; ?></td>
+                            <td class="fw-bold"><?= e($row['judul']); ?></td>
                             <td class="text-center">
                                 <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a href="hapus.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus foto ini?')"><i class="fa-solid fa-trash"></i></a>

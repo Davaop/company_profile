@@ -1,5 +1,6 @@
 <?php
 // Deteksi nama file yang sedang dibuka
+include_once __DIR__ . "/functions.php";   // <-- baris baru, biar e() kepake di semua halaman publik
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
