@@ -58,21 +58,7 @@ if (isset($_POST['simpan'])) {
 </head>
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="../dashboard.php"><i class="fa-solid fa-gauge me-2"></i>Admin Panel</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link" href="../dashboard.php">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link active" href="index.php">Profil Perusahaan</a></li>
-        <li class="nav-item"><a class="nav-link" href="../produk/index.php">Produk</a></li>
-        <li class="nav-item"><a class="nav-link" href="../artikel/index.php">Artikel</a></li>
-        <li class="nav-item"><a class="nav-link" href="../galeri/index.php">Galeri</a></li>
-      </ul>
-      <a href="../logout.php" class="btn btn-danger btn-sm"><i class="fa-solid fa-power-off me-1"></i> Logout</a>
-    </div>
-  </div>
-</nav>
+<?php $base = "../"; $current_admin = "profile"; include "../../includes/admin_nav.php"; ?>
 
 <div class="container my-5">
     <div class="row justify-content-center">

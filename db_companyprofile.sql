@@ -44,6 +44,15 @@ CREATE TABLE `galeri` (
   `foto` VARCHAR(255) NOT NULL
 );
 
+-- 6. Tabel Pesan
+CREATE TABLE `pesan` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `nama` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `isi_pesan` TEXT NOT NULL,
+  `tanggal_kirim` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Data Awal Akun Admin (password : admin123)
 INSERT INTO `admin` (`username`, `password`, `nama_lengkap`) 
 VALUES ('admin', '$2a$12$UXSsKEsaSUnjw76D/TZQSOc3f7dTkrecIzRVYxad5884UxkGe4byW', 'Administrator');

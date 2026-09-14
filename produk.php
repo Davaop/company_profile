@@ -25,9 +25,9 @@ include "includes/header.php";
                 <div class="col-md-4">
                     <div class="card h-100 shadow-sm border-0">
                         <!-- Gambar Produk -->
-                        <img src="assets/img/<?= $row['gambar']; ?>" 
+                        <img src="assets/img/<?= e($row['gambar']); ?>" 
                              class="card-img-top" 
-                             alt="<?= $row['nama_produk']; ?>" 
+                             alt="<?= e($row['nama_produk']); ?>" 
                              style="height: 220px; object-fit: cover;" 
                              onerror="this.src='https://via.placeholder.com/400x220?text=Produk+IT'">
                         
@@ -36,8 +36,8 @@ include "includes/header.php";
                             <p class="card-text text-secondary lh-base"><?= nl2br(e($row['deskripsi'])); ?></p>
                         </div>
                         <div class="card-footer bg-white border-0 pb-3">
-                            <a href="kontak.php" class="btn btn-outline-primary w-100">
-                                <i class="fa-solid fa-envelope me-1"></i> Pesan Layanan Ini
+                            <a href="detail_produk.php?id=<?= $row['id']; ?>" class="btn btn-outline-primary w-100">
+                                <i class="fa-solid fa-eye me-1"></i> Lihat Detail
                             </a>
                         </div>
                     </div>

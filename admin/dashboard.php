@@ -24,30 +24,7 @@ $count_galeri  = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM galeri"))
 </head>
 <body class="bg-light">
 
-<!-- NAVBAR ADMIN -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="dashboard.php"><i class="fa-solid fa-gauge me-2"></i>Admin Panel</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navAdmin">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navAdmin">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link active" href="dashboard.php">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="profile/index.php">Profil Perusahaan</a></li>
-        <li class="nav-item"><a class="nav-link" href="produk/index.php">Produk</a></li>
-        <li class="nav-item"><a class="nav-link" href="artikel/index.php">Artikel</a></li>
-        <li class="nav-item"><a class="nav-link" href="galeri/index.php">Galeri</a></li>
-      </ul>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-white small">Halo, <b><?= $_SESSION['admin_nama']; ?></b></span>
-        <a href="logout.php" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin logout?')">
-            <i class="fa-solid fa-power-off me-1"></i> Logout
-        </a>
-      </div>
-    </div>
-  </div>
-</nav>
+<?php $base = ""; $current_admin = "dashboard"; include "../includes/admin_nav.php"; ?>
 
 <!-- CONTENT DASHBOARD -->
 <div class="container my-5">
